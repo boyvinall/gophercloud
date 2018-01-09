@@ -74,7 +74,7 @@ func Delete(client *gophercloud.ServiceClient, id string) (r DeleteResult) {
 func IDFromName(client *gophercloud.ServiceClient, name string) (string, error) {
 	count := 0
 	id := ""
-	allPages, err := ListDetail(client, nil).AllPages()
+	allPages, err := ListDetail(client, ListOpts{Name: name}).AllPages()
 	if err != nil {
 		return "", err
 	}

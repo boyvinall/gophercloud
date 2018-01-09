@@ -756,7 +756,7 @@ func CreateImage(client *gophercloud.ServiceClient, id string, opts CreateImageO
 func IDFromName(client *gophercloud.ServiceClient, name string) (string, error) {
 	count := 0
 	id := ""
-	allPages, err := List(client, nil).AllPages()
+	allPages, err := List(client, ListOpts{Name: name}).AllPages()
 	if err != nil {
 		return "", err
 	}

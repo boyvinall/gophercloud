@@ -138,7 +138,7 @@ func Delete(c *gophercloud.ServiceClient, networkID string) (r DeleteResult) {
 func IDFromName(client *gophercloud.ServiceClient, name string) (string, error) {
 	count := 0
 	id := ""
-	pages, err := List(client, nil).AllPages()
+	pages, err := List(client, ListOpts{Name: name}).AllPages()
 	if err != nil {
 		return "", err
 	}
