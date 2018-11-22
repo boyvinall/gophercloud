@@ -299,6 +299,23 @@ func ForceDelete(client *gophercloud.ServiceClient, id string) (r ActionResult) 
 	return
 }
 
+// Shelve requests the server to be shelved.
+//
+// Shelving a server indicates it will not be needed for some time and may be
+// temporarily removed from the hypervisors. This allows its resources to be
+// freed up for use by someone else.
+func Shelve(client *gophercloud.ServiceClient, id string) (r ActionResult) {
+	_, r.Err = client.Post(actionURL(client, id), map[string]interface{}{"shelve": nil}, nil, nil)
+	return
+}
+
+// Unshelve requests the server to be unshelved.
+// See Shelve() for more details.
+func Unshelve(client *gophercloud.ServiceClient, id string) (r ActionResult) {
+	_, r.Err = client.Post(actionURL(client, id), map[string]interface{}{"unshelve": nil}, nil, nil)
+	return
+}
+
 // Get requests details on a single server, by ID.
 func Get(client *gophercloud.ServiceClient, id string) (r GetResult) {
 	_, r.Err = client.Get(getURL(client, id), &r.Body, &gophercloud.RequestOpts{
